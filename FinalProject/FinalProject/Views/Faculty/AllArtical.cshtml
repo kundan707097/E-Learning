@@ -1,0 +1,45 @@
+﻿@model FinalProject.Models.Knowledges
+
+@{
+    ViewData["Title"] = "AllArtical";
+}
+
+<h1>Article</h1>
+
+
+<table class="">
+    <thead>
+        <tr>
+            
+            @*<th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>  *@                     
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => Model.Description)
+            </td>                  
+        </tr>
+
+    </tbody>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model=>model.authorName)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem=>Model.authorName)
+            </td>
+            
+
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@if(TempData["AlertMessage"]!=null)
+{
+   <div class="alert alert-success" id="divexample">
+       <strong>! @TempData["AlertMessage"]</strong>
+   </div>
+}
+    <script>
+        function hidediv(){
+            document.getElementById("divexample").style.visibility="hidden";
+        }
+        setTimeout("hidediv()",4000);
+    </script>
+<div class="text-center">
+    <h1 class="display-4">E-Learning-System</h1>
+    
+</div>

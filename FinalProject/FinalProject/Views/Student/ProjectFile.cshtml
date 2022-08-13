@@ -1,0 +1,81 @@
+﻿@model IEnumerable<FinalProject.Models.ProjectModel>
+
+@{
+    ViewData["Title"] = "ProjectFile";
+}
+@*
+<h1>ProjectFile</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.fullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.projectUrl)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.projectUrl)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>*@
+
+
+
+
+ 
+<!DOCTYPE html>
+ 
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <title>Index</title>
+</head>
+<body>
+    <table class="table border-2">
+        <tr>
+            <th>File Name</th>
+            <th>Download</th>
+        </tr>
+        @foreach (ProjectModel file in Model)
+        {
+            <tr>
+                <td>@file.projectUrl</td>
+                <td>@Html.ActionLink("Click Here" ,"ProjectDownloadFile", new { fileName = file.projectUrl},new { @class = "btn btn-primary"})</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

@@ -1,0 +1,180 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FinalProject</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/FinalProject.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FinalProject</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    
+                    
+                        @if (_signInManager.IsSignedIn(User))
+                        {
+                            <ul class="navbar-nav flex-grow-1">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                
+                                    
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Project</a>
+                                        <ul  class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item"  asp-action="ListUser" asp-controller="Admin">Manage Faculty</a></li>
+                                            <li><a class="dropdown-item"  asp-action="StudentList" asp-controller="Admin">Manage Student</a></li>
+                                            <li><a class="dropdown-item"  asp-action="ViewProject" asp-controller="Student">View Projects</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                }
+                                else if(User.IsInRole("Student"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Faculty" asp-action="ShowArtical">All Article</a>
+                                    </li>
+                                
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Documentation</a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item"  asp-action="Upload" asp-controller="Student" >Upload Documentation</a></li>
+                                            <li><a class="dropdown-item"  asp-action="UpoladFile" asp-controller="Student" >View Documentation</a></li>
+                                            
+                                        </ul>
+                                    </li>
+
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Project</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a class="dropdown-item"  asp-action="UploadProject" asp-controller="Student">UploadProject</a></li>
+                                               
+                                                <li><a class="dropdown-item"  asp-action="ProjectFile" asp-controller="Student">All Project</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item dropdown ">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Chat</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li btn btn-outline-primary>
+                                                    <a class="dropdown-item" asp-action="Chat" asp-controller="Faculty">Send Massege</a>
+                                                </li>
+                                                <li btn btn-outline-primary>
+                                                    <a class="dropdown-item"  asp-action="Tosender" asp-controller="Faculty">Receive Massege</a>
+                                                </li>
+                                            </ul>
+
+                                        </li>
+                                        
+                                    
+                                    
+                                    
+                                }
+                                else if(User.IsInRole("Faculty"))
+                                {
+                                
+                                
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Documentation</a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item"  asp-action="Upload" asp-controller="Student">Upload Documentation</a></li>
+                                            <li><a class="dropdown-item"  asp-action="ViewUpload" asp-controller="Student">View Documentation</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Project</a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item"  asp-action="ViewProject" asp-controller="Student">View Project</a></li>
+                                        
+                                        </ul>
+                                    </li>
+                                    <li class ="nav-item">
+                                        <a class ="nav-link text-dark"  asp-controller="Admin" asp-action="StudentList"> List Of Student</a>
+
+                                    </li>
+                                
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Article</a>
+                                        <ul  class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item"  asp-action="ShowArtical" asp-controller="Faculty">Read Article</a></li>
+                                            <li><a class="dropdown-item"  asp-action="knowledge" asp-controller="Faculty">Create Article</a></li>
+                                        
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Chat</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li >
+                                                    <a class="dropdown-item"  asp-action="Chat" asp-controller="Faculty">Send Massege</a>
+                                                </li>
+                                                <li >
+                                                    <a class="dropdown-item"  asp-action="Tosender" asp-controller="Faculty">receive Massege</a>
+                                                </li>
+                                            </ul>
+
+                                        </li>
+                                    
+                                
+                                    
+                                }
+
+                            </ul>
+                            <ul>
+                                <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">@User.Identity.Name
+
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <form method="post" asp-action="Logout" asp-controller="Account">
+                                                <button type="submit" class="btn btn-primary">Logout</button>
+                                                
+                                            </form>
+                                            
+                                            
+                                        </ul>
+                                    </li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul class ="navbar-nav" style="position:absolute;right:20px">
+                            <li class="nav-item">
+                                <a class ="btn btn-outline-primary" asp-action="Register" asp-controller="Account"class="nav-link" >Register</a>
+                                <a class ="btn btn-primary" asp-action="Login" asp-controller="Account" class="nav-link">login</a>
+                            </li>
+                            </ul>
+                        }
+
+
+
+                    
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        @*<div class="container">
+            &copy; 2022 - FinalProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>*@
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
